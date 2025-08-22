@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard — Bootstrap 5.3</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --sidebar-width: 260px;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-color: #f8f9fa;
+    }
+
+    /* Large-screen sidebar (visible >= lg) */
+    .sidebar-lg {
+      width: var(--sidebar-width);
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      padding-top: 56px; /* navbar height */
+      overflow-y: auto;
+      background: #fff;
+      border-right: 1px solid rgba(0,0,0,0.05);
+      z-index: 1020;
+    }
+
+    /* Make main content sit to the right of sidebar on lg+ */
+    @media (min-width: 992px) {
+      main.content {
+        margin-left: var(--sidebar-width);
+      }
+    }
+
+    /* Offcanvas custom sizing for mobile */
+    .offcanvas-start {
+      width: 280px;
+    }
+
+    /* Chart card fixed height for demo */
+    .chart-card {
+      min-height: 320px;
+    }
+
+    footer.footer {
+      padding: 1rem 0;
+    }
+
+    /* small helper to keep sidebar links compact */
+    .nav-sidebar .nav-link {
+      padding: .6rem 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar (sticky) -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <!-- Offcanvas toggle (visible on md and below) -->
+      <button class="btn btn-dark d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <a class="navbar-brand me-3" href="#">Admin Dashboard</a>
+
+      <!-- responsive search (collapses on small screens) -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="d-flex ms-auto my-2 my-lg-0" role="search">
+          <div class="input-group">
+            <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+            <button class="btn btn-outline-light" type="submit">Search</button>
+          </div>
+        </form>
+
+        <ul class="navbar-nav ms-3">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://via.placeholder.com/32" alt="avatar" class="rounded-circle me-1" style="width:32px;height:32px;object-fit:cover"> Admin
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Sign out</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <!-- small-screen search trigger -->
+      <button class="btn btn-outline-light d-lg-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11 6a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>
+          <path d="M15.7 14.3l-3.39-3.39" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Offcanvas Sidebar for small screens -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Menu</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+      <nav class="nav flex-column nav-sidebar">
+        <a class="nav-link active" href="#"><strong>Dashboard</strong></a>
+        <a class="nav-link" href="#">Users</a>
+        <a class="nav-link" href="#">Orders</a>
+        <a class="nav-link" href="#">Reports</a>
+        <a class="nav-link" href="#">Settings</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Static Sidebar for large screens -->
+  <aside class="sidebar-lg d-none d-lg-block">
+    <div class="p-3">
+      <div class="d-flex align-items-center mb-3">
+        <img src="https://via.placeholder.com/40" alt="logo" class="me-2" style="width:40px;height:40px;object-fit:cover">
+        <div>
+          <h6 class="mb-0">Your Company</h6>
+          <small class="text-muted">Admin Panel</small>
+        </div>
+      </div>
+
+      <hr>
+
+      <nav class="nav flex-column nav-sidebar">
+        <a class="nav-link active" href="#"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
+        <a class="nav-link" href="#">Users</a>
+        <a class="nav-link" href="#">Products</a>
+        <a class="nav-link" href="#">Reports</a>
+        <a class="nav-link" href="#">Integrations</a>
+      </nav>
+
+      <hr>
+
+      <div class="px-1">
+        <small class="text-muted">Quick Links</small>
+        <ul class="list-unstyled mt-2">
+          <li><a href="#" class="nav-link p-0">Profile</a></li>
+          <li><a href="#" class="nav-link p-0">Billing</a></li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main content area -->
+  <main class="content">
+    <div class="container-fluid pt-4">
+
+      <!-- Page header -->
+      <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div>
+          <h1 class="h3 mb-0">Dashboard</h1>
+          <p class="text-muted small mb-0">Welcome back — here's what's happening with your projects.</p>
+        </div>
+        <div class="mt-3 mt-sm-0">
+          <div class="btn-group">
+            <button class="btn btn-primary">New Report</button>
+            <button class="btn btn-outline-secondary">Export</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cards row (responsive) -->
+      <div class="row g-3">
+        <div class="col-12 col-md-6 col-xl-3">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h6 class="card-title">Users</h6>
+              <h3>1,234</h3>
+              <small class="text-success">+3.4% since last week</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-3">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h6 class="card-title">Orders</h6>
+              <h3>567</h3>
+              <small class="text-danger">-1.2% since last week</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-3">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h6 class="card-title">Revenue</h6>
+              <h3>$12,345</h3>
+              <small class="text-success">+8.1% since last month</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-3">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h6 class="card-title">Server</h6>
+              <h3>99.99%</h3>
+              <small class="text-muted">Uptime</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts and Table -->
+      <div class="row g-3 mt-1">
+        <div class="col-12 col-xl-8">
+          <div class="card chart-card shadow-sm h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <strong>Traffic</strong>
+              <div>
+                <small class="text-muted">Last 6 months</small>
+              </div>
+            </div>
+            <div class="card-body">
+              <div style="height:280px">
+                <canvas id="trafficChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-xl-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-header"><strong>Recent Users</strong></div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>John Doe</td>
+                      <td>john@example.com</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Jane Smith</td>
+                      <td>jane@example.com</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>Ali V.</td>
+                      <td>ali@example.com</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="card shadow-sm mt-3">
+            <div class="card-body small text-muted">
+              <strong>Notes</strong>
+              <p class="mb-0">This layout uses a fixed sidebar on large screens and an offcanvas (mobile) sidebar. The top navbar is sticky.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Larger table example -->
+      <div class="row g-3 mt-2">
+        <div class="col-12">
+          <div class="card shadow-sm">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <strong>Orders</strong>
+              <div>
+                <button class="btn btn-sm btn-outline-secondary">Filter</button>
+              </div>
+            </div>
+            <div class="card-body table-responsive">
+              <table class="table table-striped table-hover align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1001</td>
+                    <td>John Doe</td>
+                    <td>2025-08-01</td>
+                    <td><span class="badge bg-success">Completed</span></td>
+                    <td>$120.00</td>
+                  </tr>
+                  <tr>
+                    <td>1002</td>
+                    <td>Jane Smith</td>
+                    <td>2025-08-02</td>
+                    <td><span class="badge bg-warning">Pending</span></td>
+                    <td>$89.50</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer mt-4">
+        <div class="text-center text-muted">
+          &copy; 2025 Your Company. Designed with ❤️ using Bootstrap 5.3
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- Bootstrap JS + Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <script>
+    // Example Chart.js (responsive)
+    const ctx = document.getElementById('trafficChart');
+    if (ctx) {
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+          datasets: [{
+            label: 'Visitors',
+            data: [1200, 1900, 1400, 2100, 2500, 3000],
+            tension: 0.3,
+            fill: true,
+            pointRadius: 3
+          }]
+        },
+        options: {
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: { beginAtZero: true }
+          }
+        }
+      });
+    }
+
+    // close offcanvas automatically when a nav link is clicked (mobile)
+    document.addEventListener('click', function (e) {
+      const offcanvasEl = document.getElementById('offcanvasSidebar');
+      if (!offcanvasEl) return;
+      const bsOff = bootstrap.Offcanvas.getInstance(offcanvasEl);
+      if (!bsOff) return;
+
+      const target = e.target.closest('.offcanvas-body .nav-link');
+      if (target) {
+        bsOff.hide();
+      }
+    });
+  </script>
+</body>
+</html>

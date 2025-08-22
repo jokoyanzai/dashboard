@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 100;
+            padding: 56px 0 0; /* Height of navbar */
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+            width: 240px;
+        }
+
+        .sidebar-sticky {
+            position: relative;
+            top: 0;
+            height: calc(100vh - 56px); /* Adjust for navbar height */
+            padding-top: .5rem;
+            overflow-x: hidden;
+            overflow-y: auto; /* Enable scrollable sidebar */
+        }
+        
+        /* Main content area */
+        .main-content {
+            /* Add consistent padding for all screen sizes */
+            padding: 2rem;
+            padding-top: 72px; /* 56px for navbar + 1rem top padding */
+        }
+
+        /* On large screens (lg), add a left margin to the main content
+           to make space for the fixed sidebar. */
+        @media (min-width: 992px) {
+            .main-content {
+                margin-left: 240px;
+            }
+        }
+        
+        .navbar .form-control {
+            padding: .75rem 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top p-2">
+        <div class="container-fluid">
+            <!-- Mobile Sidebar Toggle -->
+            <button class="navbar-toggler d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <a class="navbar-brand fw-bold" href="#">Dashboard</a>
+
+            <!-- Responsive Search Bar -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="d-flex ms-auto" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search">
+                </form>
+                <ul class="navbar-nav ps-3">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i> Admin
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Sidebar (Visible on large screens, offcanvas on small) -->
+    <aside class="d-none d-lg-block sidebar bg-light">
+        <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">
+                        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#">
+                        <i class="bi bi-file-earmark-text me-2"></i> Orders
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#">
+                        <i class="bi bi-box-seam me-2"></i> Products
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#">
+                        <i class="bi bi-people me-2"></i> Customers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#">
+                        <i class="bi bi-bar-chart-line me-2"></i> Reports
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#">
+                        <i class="bi bi-layers me-2"></i> Integrations
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    
+    <!-- Offcanvas Sidebar for Mobile -->
+    <div class="offcanvas offcanvas-start bg-light" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold" id="sidebarLabel">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">
+                        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#">
+                        <i class="bi bi-file-earmark-text me-2"></i> Orders
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#">
+                        <i class="bi bi-box-seam me-2"></i> Products
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#">
+                        <i class="bi bi-people me-2"></i> Customers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#">
+                        <i class="bi bi-bar-chart-line me-2"></i> Reports
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#">
+                        <i class="bi bi-layers me-2"></i> Integrations
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Dashboard</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stat Cards -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="bi bi-cart4 h1 text-primary me-3"></i>
+                        <div>
+                            <h5 class="card-title">1,250</h5>
+                            <p class="card-text text-muted">Sales</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="bi bi-currency-dollar h1 text-success me-3"></i>
+                        <div>
+                            <h5 class="card-title">$34,023</h5>
+                            <p class="card-text text-muted">Revenue</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="bi bi-people-fill h1 text-info me-3"></i>
+                        <div>
+                            <h5 class="card-title">8,930</h5>
+                            <p class="card-text text-muted">Customers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="bi bi-graph-up-arrow h1 text-warning me-3"></i>
+                        <div>
+                            <h5 class="card-title">+12.5%</h5>
+                            <p class="card-text text-muted">Growth</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="bi bi-bar-chart-line-fill me-1"></i>
+                Weekly Sales
+            </div>
+            <div class="card-body">
+                <canvas id="myChart" width="100%" height="40"></canvas>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="card">
+            <div class="card-header">
+                <i class="bi bi-table me-1"></i>
+                Recent Orders
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Customer</th>
+                                <th scope="col">Product</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1001</td>
+                                <td>Budi Santoso</td>
+                                <td>Laptop Pro X</td>
+                                <td>2025-08-11</td>
+                                <td><span class="badge bg-success">Shipped</span></td>
+                            </tr>
+                            <tr>
+                                <td>1002</td>
+                                <td>Ani Yudhoyono</td>
+                                <td>Wireless Mouse</td>
+                                <td>2025-08-11</td>
+                                <td><span class="badge bg-warning text-dark">Processing</span></td>
+                            </tr>
+                            <tr>
+                                <td>1003</td>
+                                <td>Citra Lestari</td>
+                                <td>Mechanical Keyboard</td>
+                                <td>2025-08-10</td>
+                                <td><span class="badge bg-success">Shipped</span></td>
+                            </tr>
+                            <tr>
+                                <td>1004</td>
+                                <td>Dewi Anggraini</td>
+                                <td>4K Monitor</td>
+                                <td>2025-08-09</td>
+                                <td><span class="badge bg-danger">Cancelled</span></td>
+                            </tr>
+                            <tr>
+                                <td>1005</td>
+                                <td>Eko Prasetyo</td>
+                                <td>Webcam HD</td>
+                                <td>2025-08-09</td>
+                                <td><span class="badge bg-secondary">Delivered</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="pt-4 my-4 border-top">
+            <div class="text-center">
+                <small class="d-block mb-3 text-muted">&copy; 2025 Your Company</small>
+            </div>
+        </footer>
+    </main>
+    
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom JS to initialize chart -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('myChart');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                    datasets: [{
+                        label: 'Sales',
+                        data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+                        lineTension: 0.3,
+                        backgroundColor: 'rgba(0, 123, 255, 0.05)',
+                        borderColor: 'rgba(0, 123, 255, 1)',
+                        pointRadius: 3,
+                        pointBackgroundColor: 'rgba(0, 123, 255, 1)',
+                        pointBorderColor: 'rgba(0, 123, 255, 1)',
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
